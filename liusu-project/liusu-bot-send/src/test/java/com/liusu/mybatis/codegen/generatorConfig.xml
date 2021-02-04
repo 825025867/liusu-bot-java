@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <context id="test1" targetRuntime="MyBatis3">
+
+    <property name="javaFileEncoding" value="UTF-8" />
+    <property name="autoDelimitKeywords" value="false" />
+
+    <!-- MybatisSerializablePlugin -->
+    <plugin type="com.hbmss.framework.mybatis.generator.MybatisSerializablePlugin"></plugin>
+
+
+    <commentGenerator type="com.hbmss.framework.mybatis.generator.MybatisCommentGenerator">
+      <property name="addRemarkComments" value="true" />
+      <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+    </commentGenerator>
+
+    <!-- dbms -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/liusu_bot?serverTimezone=UTC"
+      userId="liusu" password="ggg825025">
+    </jdbcConnection>
+
+
+    <javaTypeResolver type="com.hbmss.framework.mybatis.generator.MybatisJavaTypeResolver">
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <!-- dao -->
+    <!-- ap_car_type dao begin -->
+
+    <javaModelGenerator targetPackage="com.liusu.listener.server.auth.user.wechat.entity" targetProject="./src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+      <property name="immutable" value="false" />
+      <property name="rootClass" value="com.hbmss.framework.common.mapper.DataEntity" />
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="com.liusu.listener.server.auth.user.wechat.dao" targetProject="./src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.liusu.listener.server.auth.user.wechat.dao" targetProject="./src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="rootInterface" value="com.hbmss.framework.common.mapper.BaseMapper" />
+    </javaClientGenerator>
+
+    <!-- <table tableName="ap_sms_verify_code" domainObjectName="ApSmsVerifyCodeDO" mapperName="ApSmsVerifyCodeMapper" enableCountByExample="false" enableDeleteByExample="false" 
+      enableSelectByExample="false" selectByExampleQueryId="false" enableUpdateByExample="false"> <property name="useActualColumnNames" value="false" /> </table> -->
+
+    <!-- ap_car_type dao begin -->
+
+    <table tableName="ap_user_wechat" domainObjectName="ApUserWechatDO" mapperName="ApUserWechatMapper" enableCountByExample="false" enableDeleteByExample="false"
+      enableSelectByExample="false" selectByExampleQueryId="false" enableUpdateByExample="false">
+      <property name="useActualColumnNames" value="false" />
+    </table>
+
+  </context>
+</generatorConfiguration>

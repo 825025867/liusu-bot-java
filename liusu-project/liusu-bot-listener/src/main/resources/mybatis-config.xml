@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <settings>
+    <setting name="lazyLoadingEnabled" value="false" />
+    <setting name="cacheEnabled" value="true" />
+    <setting name="useGeneratedKeys" value="false" />
+    <setting name="defaultExecutorType" value="REUSE" />
+    <setting name="mapUnderscoreToCamelCase" value="true" />
+    <setting name="localCacheScope" value="STATEMENT" />
+    <!-- <setting name="localCacheScope" value="SESSION" /> -->
+  </settings>
+
+  <typeAliases>
+    <package name="com.liusu.*.server.**.entity" />
+  </typeAliases>
+
+  <plugins>
+    <plugin interceptor="com.hbmss.framework.mybatis.paginator.MybatisPageSortInterceptor" />
+    <plugin interceptor="com.hbmss.framework.mybatis.paginator.MybatisPageInterceptor">
+      <property name="poolMaxSize" value="10" />
+    </plugin>
+    <plugin interceptor="com.hbmss.framework.mybatis.cache.redis.RedisCacheInterceptor" />
+    <plugin interceptor="com.hbmss.framework.mybatis.loginator.PrintSqlInterceptor" />
+  </plugins>
+
+
+</configuration>

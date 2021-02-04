@@ -1,0 +1,177 @@
+# spring boot properties
+# created by graces LiuSu in 2021-01-25
+########################################
+
+# server config
+########################################
+server:
+  port: 9082
+  max-http-header-size: 10KB
+  servlet:
+    context-path: /
+    session:
+      timeout: 1
+    encoding:
+      force: true
+  tomcat:
+    connections-timeout: 6000
+    max-connections: 5000
+    max-http-form-post-size: -1
+    threads:
+      max: 2000
+      min-spare: 100
+    uri-encoding: UTF-8
+multipart:
+  enabled: true
+  file-size-threshold: 0
+  max-file-size: 10Mb
+  max-request-size: 10Mb
+
+# spring config
+########################################
+spring:
+  application:
+    name: liusu-bot-process-web
+  main:
+    allow-bean-definition-overriding: true
+  aop:
+    auto: true
+    proxy-target-class: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+        prefer-ip-address: true
+  datasource:
+    name: mysql-liusu-bot
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+    username: liusu
+    password: ggg825025
+    url: 'jdbc:log4jdbc:mysql://localhost:3306/liusu_bot?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&useServerPrepStmts=true&cachePrepStmts=true&rewriteBatchedStatements=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai'
+    druid:
+      filters: mergeStat
+      initial-size: 5
+      log-abandoned: true
+      max-active: 128
+      max-wait: 60000.0
+      min-evictable-idle-time-millis: 25200000
+      min-idle: 0
+      remove-abandoned: true
+      remove-abandoned-timeout: 1800
+      test-on-borrow: true
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      validation-query: select 'x'
+  # HTTP
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  # Jackson 配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # kafka 配置
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      auto-commit-interval: 100
+      auto-offset-reset: latest
+      enable-auto-commit: true
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      acks: 1
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 0
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  # rabbitmq 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: liusu
+    password: ggg825025
+    publisher-confirms: true
+    publisher-returns: true
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+#    password:
+    database: 0
+    timeout: 6000
+#    cluster:
+#      nodes:
+#      - 192.168.1.204:7011
+#      - 192.168.1.204:7012
+#      - 192.168.1.204:7013
+#      - 192.168.1.204:7014
+#      - 192.168.1.204:7015
+#      - 192.168.1.204:7016
+#      - 192.168.1.205:7021
+#      - 192.168.1.205:7022
+#      - 192.168.1.205:7023
+#      - 192.168.1.205:7024
+#      - 192.168.1.205:7025
+#      - 192.168.1.205:7026
+#      maxRedirects: 3
+
+# mybatis config
+########################################
+#mybatis:
+#  config-location: classpath:mybatis-config.xml
+#  mapper-locations: classpath*:com/liusu/*/server/**/dao/**/*.xml
+
+# shiro config
+########################################
+#shiro:
+#  loginUrl: /api/login
+#  permsManager:
+#    permsTemplate: session,user,perms["{0}"]
+#  sessionManager:
+#    maxSessionCount: 3
+
+# key generator worker id
+########################################
+jdbc:
+  default:
+    key:
+      generator:
+        worker:
+          id: 10
+          
+# feign config
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+        
+# ribbon config
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+# logging config
+########################################
+logging:
+  path: ./log
+  file:
+    # 设置日志文件大小
+    max-size: 10MB
+  level:
+    root: WARN
+    org.liusu: debug
+    org.springframework: info
